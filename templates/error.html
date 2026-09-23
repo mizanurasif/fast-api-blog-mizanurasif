@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block content %}
+  <article class="content-section p-5 mb-4 text-center">
+    <p class="stat-value" style="font-size: 3.5rem">{{ status_code }}</p>
+    <h1 class="page-heading">Something went wrong</h1>
+    <p class="text-body-secondary">{{ message }}</p>
+    <a class="btn btn-primary mt-2" href="{{ url_for('home') }}">Back to Home</a>
+  </article>
+{% endblock content %}

@@ -1,0 +1,779 @@
+/* ============================================================
+   Design tokens
+   ============================================================ */
+:root {
+  /* Fonts */
+  --font-heading: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  --font-body: "Nunito", system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+
+  /* Brand */
+  --color-steel: #527c9f;
+  --color-steel-dark: #3f6179;
+  --color-steel-light: #8aadc8;
+
+  /* Surfaces */
+  --color-bg-body: #f2f5f8;
+  --color-bg-content: #ffffff;
+  --color-bg-subtle: #f7f9fb;
+
+  /* Text */
+  --color-text-primary: #3a424a;
+  --color-text-heading: #1f262d;
+  --color-text-muted: #6b7681;
+
+  /* Lines */
+  --color-border: #e3e8ed;
+  --color-border-light: #eef1f5;
+
+  /* Links */
+  --color-nav-link: #d4dee6;
+  --color-nav-link-hover: #ffffff;
+  --color-link-hover: #3f6179;
+
+  /* Voting */
+  --color-vote-up: #d97706;
+  --color-vote-down: #527c9f;
+  --color-vote-idle: #b3bcc4;
+  --color-vote-track: #f2f5f8;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgba(16, 24, 32, 0.04),
+    0 1px 3px rgba(16, 24, 32, 0.06);
+  --shadow-md: 0 4px 14px rgba(16, 24, 32, 0.08),
+    0 2px 4px rgba(16, 24, 32, 0.04);
+  --shadow-lg: 0 14px 32px rgba(16, 24, 32, 0.13);
+
+  /* Geometry */
+  --radius-sm: 0.5rem;
+  --radius: 0.875rem;
+  --radius-lg: 1.25rem;
+  --spacing-xl: 5.5rem;
+  --article-img-size: 3.5rem;
+  --account-img-size: 7.813rem;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-body);
+  background-image: radial-gradient(
+      circle at 12% -8%,
+      rgba(82, 124, 159, 0.1),
+      transparent 42%
+    ),
+    radial-gradient(circle at 92% 0%, rgba(82, 124, 159, 0.07), transparent 38%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  padding-top: var(--spacing-xl);
+  padding-bottom: 2rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text-heading);
+  letter-spacing: -0.015em;
+}
+
+h5 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+  transition: color 0.15s ease-in-out;
+}
+
+hr {
+  border-color: var(--color-border);
+  opacity: 1;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-steel);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   Header / navigation
+   ============================================================ */
+.bg-steel {
+  background-color: var(--color-steel);
+  background-image: linear-gradient(
+    100deg,
+    var(--color-steel-dark),
+    var(--color-steel)
+  );
+}
+
+.site-header .navbar {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 4px 20px rgba(16, 24, 32, 0.16);
+}
+
+.navbar-brand {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: var(--color-nav-link);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  padding-inline: 0.7rem;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.site-header .navbar-nav .nav-link:hover,
+.site-header .navbar-nav .nav-link:focus {
+  color: var(--color-nav-link-hover);
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.site-header .navbar-nav .nav-link.active {
+  color: var(--color-nav-link-hover);
+  background-color: rgba(255, 255, 255, 0.16);
+}
+
+/* ============================================================
+   Cards / content sections
+   ============================================================ */
+.content-section {
+  background: var(--color-bg-content);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.18s ease, transform 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.content-section:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-light);
+}
+
+/* Only lift the cards in the feed, which act as links to a post */
+#postsContainer .content-section:hover {
+  transform: translateY(-2px);
+}
+
+.section-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+}
+
+.page-heading {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.page-subheading {
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+/* ============================================================
+   Articles
+   ============================================================ */
+.article-title {
+  color: var(--color-text-heading);
+  font-weight: 700;
+  transition: color 0.2s ease-in-out;
+}
+
+a.article-title:hover,
+a.article-title:focus {
+  color: var(--color-steel);
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--color-text-primary);
+  margin-bottom: 0;
+}
+
+.article-img {
+  height: var(--article-img-size);
+  width: var(--article-img-size);
+  flex-shrink: 0;
+  object-fit: cover;
+  border: 2px solid var(--color-bg-content);
+  box-shadow: 0 0 0 1px var(--color-border);
+}
+
+.article-metadata {
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border-light);
+  font-size: 0.875rem;
+}
+
+.article-metadata a {
+  font-weight: 700;
+  color: var(--color-steel);
+}
+
+.article-metadata a:hover,
+.article-metadata a:focus {
+  color: var(--color-steel-dark);
+  text-decoration: none;
+}
+
+/* Dot separator before the date, without touching the markup */
+.article-metadata small::before {
+  content: "\00b7";
+  margin-right: 0.45rem;
+  color: var(--color-vote-idle);
+}
+
+.article-svg {
+  width: 1.563rem;
+  height: 1.563rem;
+  vertical-align: middle;
+}
+
+/* --- Feed-only tweaks. #postsContainer exists on the feed pages but not on
+   the single-post page, so none of these affect a full post. --- */
+#postsContainer .content-section {
+  padding-top: 1.1rem !important;
+  padding-bottom: 1.1rem !important;
+}
+
+#postsContainer .article-img {
+  --article-img-size: 2.75rem;
+}
+
+#postsContainer h2 {
+  font-size: 1.3rem;
+  margin-bottom: 0.4rem;
+}
+
+/* Clamp the feed to a 3-line excerpt so the cards stay even */
+#postsContainer .article-content {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+/* ============================================================
+   Voting
+   ============================================================ */
+.vote-box {
+  min-width: 2.75rem;
+  gap: 0.1rem;
+  padding: 0.3rem 0.15rem;
+  border-radius: 999px;
+  background: var(--color-vote-track);
+  user-select: none;
+}
+
+.vote-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  line-height: 1;
+  font-size: 0.95rem;
+  color: var(--color-vote-idle);
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    transform 0.12s ease;
+}
+
+.vote-btn:hover:not(:disabled) {
+  color: var(--color-text-heading);
+  background-color: rgba(16, 24, 32, 0.07);
+  transform: scale(1.12);
+}
+
+.vote-btn:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.vote-btn:disabled {
+  opacity: 0.45;
+}
+
+.vote-btn.voted-up {
+  color: var(--color-vote-up);
+  background-color: rgba(217, 119, 6, 0.13);
+}
+
+.vote-btn.voted-down {
+  color: var(--color-vote-down);
+  background-color: rgba(82, 124, 159, 0.15);
+}
+
+.vote-score {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-heading);
+  line-height: 1.1;
+}
+
+/* ============================================================
+   Stat tiles (account page)
+   ============================================================ */
+.stat-tile {
+  padding: 0.9rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-subtle);
+  height: 100%;
+}
+
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-text-heading);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-value.is-up {
+  color: var(--color-vote-up);
+}
+
+.stat-value.is-down {
+  color: var(--color-vote-down);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* ============================================================
+   Account / profile
+   ============================================================ */
+.account-img {
+  height: var(--account-img-size);
+  width: var(--account-img-size);
+  object-fit: cover;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+
+.profile-banner {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  background: linear-gradient(
+    120deg,
+    rgba(82, 124, 159, 0.13),
+    rgba(82, 124, 159, 0.04)
+  );
+  border: 1px solid var(--color-border-light);
+}
+
+.profile-avatar {
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+  border: 3px solid var(--color-bg-content);
+  box-shadow: var(--shadow-sm);
+}
+
+.file-input-sm {
+  max-width: 300px;
+}
+
+/* ============================================================
+   Sidebar
+   ============================================================ */
+.sidebar-sticky {
+  position: sticky;
+  top: var(--spacing-xl);
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-primary);
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.sidebar-link:hover,
+.sidebar-link:focus {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-steel);
+}
+
+.sidebar-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--color-steel-light);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   Forms
+   ============================================================ */
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-text-heading);
+  margin-bottom: 0.35rem;
+}
+
+.form-control {
+  border-color: var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.85rem;
+  background-color: var(--color-bg-subtle);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+    background-color 0.15s ease-in-out;
+}
+
+.form-control:focus {
+  background-color: var(--color-bg-content);
+  border-color: var(--color-steel-light);
+  box-shadow: 0 0 0 0.2rem rgba(82, 124, 159, 0.16);
+}
+
+.form-text {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+/* Bootstrap has no min-width utility; keeps long words from overflowing
+   a flex column. */
+.min-w-0 {
+  min-width: 0;
+}
+
+/* Narrow, centred card for the auth pages */
+.auth-card {
+  max-width: 27rem;
+  margin-inline: auto;
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+.btn {
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  padding: 0.5rem 1.1rem;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, transform 0.12s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #527c9f;
+  --bs-btn-border-color: #527c9f;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #466a87;
+  --bs-btn-hover-border-color: #3f6179;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #3f6179;
+  --bs-btn-active-border-color: #3a5b72;
+  box-shadow: 0 1px 2px rgba(63, 97, 121, 0.35);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 4px 12px rgba(63, 97, 121, 0.3);
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #527c9f;
+  --bs-btn-border-color: #a9c1d4;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #466a87;
+  --bs-btn-hover-border-color: #3f6179;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #3f6179;
+  --bs-btn-active-border-color: #3a5b72;
+}
+
+.btn-outline-secondary {
+  --bs-btn-color: #495057;
+  --bs-btn-border-color: #ced4da;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #5a6268;
+  --bs-btn-hover-border-color: #545b62;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #545b62;
+  --bs-btn-active-border-color: #4e555b;
+}
+
+.btn-danger {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #a85b5b;
+  --bs-btn-border-color: #a85b5b;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #924e4e;
+  --bs-btn-hover-border-color: #874848;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #874848;
+  --bs-btn-active-border-color: #7c4242;
+}
+
+.btn-outline-danger {
+  --bs-btn-color: #a85b5b;
+  --bs-btn-border-color: #ddc0c0;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #924e4e;
+  --bs-btn-hover-border-color: #874848;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #874848;
+  --bs-btn-active-border-color: #7c4242;
+}
+
+/* ============================================================
+   Modals
+   ============================================================ */
+.modal-content {
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.modal-header {
+  border-bottom-color: var(--color-border-light);
+  padding: 1rem 1.25rem;
+}
+
+.modal-footer {
+  border-top-color: var(--color-border-light);
+  background-color: var(--color-bg-subtle);
+}
+
+.modal-header.bg-success {
+  background-color: #4a7c5d !important;
+}
+
+.modal-header.bg-danger {
+  background-color: #a85b5b !important;
+}
+
+.modal-header.bg-success .modal-title,
+.modal-header.bg-danger .modal-title {
+  color: #ffffff !important;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+footer {
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-bg-content) !important;
+}
+
+/* ============================================================
+   Dark mode
+   ============================================================ */
+[data-bs-theme="dark"] {
+  --color-bg-body: #16191c;
+  --color-bg-content: #212529;
+  --color-bg-subtle: #272c31;
+
+  --color-text-primary: #d3d8dd;
+  --color-text-heading: #f0f3f5;
+  --color-text-muted: #98a2ab;
+
+  --color-border: #333a41;
+  --color-border-light: #2d343a;
+
+  --color-steel: #8aadc8;
+  --color-steel-dark: #6f93af;
+  --color-steel-light: #a9c5da;
+
+  --color-link-hover: #a9c5da;
+
+  --color-vote-up: #eda83f;
+  --color-vote-down: #8aadc8;
+  --color-vote-idle: #79838c;
+  --color-vote-track: #272c31;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.42);
+  --shadow-lg: 0 14px 32px rgba(0, 0, 0, 0.55);
+}
+
+[data-bs-theme="dark"] body {
+  background-image: radial-gradient(
+      circle at 12% -8%,
+      rgba(82, 124, 159, 0.16),
+      transparent 42%
+    ),
+    radial-gradient(circle at 92% 0%, rgba(82, 124, 159, 0.1), transparent 38%);
+}
+
+[data-bs-theme="dark"] .bg-steel {
+  background-image: linear-gradient(100deg, #2d4759, #3c627e);
+}
+
+[data-bs-theme="dark"] .vote-btn:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.09);
+}
+
+[data-bs-theme="dark"] .vote-btn.voted-up {
+  background-color: rgba(237, 168, 63, 0.16);
+}
+
+[data-bs-theme="dark"] .vote-btn.voted-down {
+  background-color: rgba(138, 173, 200, 0.18);
+}
+
+[data-bs-theme="dark"] .profile-banner {
+  background: linear-gradient(
+    120deg,
+    rgba(138, 173, 200, 0.14),
+    rgba(138, 173, 200, 0.04)
+  );
+}
+
+[data-bs-theme="dark"] .btn-outline-primary {
+  --bs-btn-color: #8aadc8;
+  --bs-btn-border-color: #4a606f;
+  --bs-btn-hover-color: #11161a;
+  --bs-btn-hover-bg: #8aadc8;
+  --bs-btn-hover-border-color: #9fbdd4;
+  --bs-btn-active-color: #11161a;
+  --bs-btn-active-bg: #9fbdd4;
+  --bs-btn-active-border-color: #b4cde0;
+}
+
+[data-bs-theme="dark"] .btn-outline-secondary {
+  --bs-btn-color: #b8bfc6;
+  --bs-btn-border-color: #4b5259;
+  --bs-btn-hover-color: #11161a;
+  --bs-btn-hover-bg: #b8bfc6;
+  --bs-btn-hover-border-color: #adb5bd;
+  --bs-btn-active-color: #11161a;
+  --bs-btn-active-bg: #adb5bd;
+  --bs-btn-active-border-color: #a2aab2;
+}
+
+[data-bs-theme="dark"] .btn-outline-danger {
+  --bs-btn-color: #d89090;
+  --bs-btn-border-color: #6b4a4a;
+  --bs-btn-hover-color: #11161a;
+  --bs-btn-hover-bg: #d89090;
+  --bs-btn-hover-border-color: #e0a8a8;
+  --bs-btn-active-color: #11161a;
+  --bs-btn-active-bg: #e0a8a8;
+  --bs-btn-active-border-color: #e8bcbc;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 768px) {
+  :root {
+    --spacing-xl: 4.75rem;
+  }
+
+  .account-heading {
+    font-size: 2rem;
+  }
+
+  .page-heading {
+    font-size: 1.45rem;
+  }
+
+  .article-img {
+    --article-img-size: 2.75rem;
+  }
+
+  #postsContainer .article-img {
+    --article-img-size: 2.25rem;
+  }
+
+  #postsContainer h2 {
+    font-size: 1.15rem;
+  }
+
+  .vote-box {
+    min-width: 2.35rem;
+    padding: 0.2rem 0.1rem;
+  }
+
+  .vote-btn {
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+
+  .profile-banner {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .profile-avatar {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .stat-value {
+    font-size: 1.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+
+  .content-section:hover,
+  #postsContainer .content-section:hover,
+  .vote-btn:hover:not(:disabled) {
+    transform: none;
+  }
+}

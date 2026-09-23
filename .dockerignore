@@ -1,0 +1,15 @@
+__pycahe__/
+.pytest_cache/
+.venv/
+.gitignore
+alembic/
+alembic.ini
+media/
+populate_images/
+tests/
+check_s3.py
+LICENSE
+populate_db.py
+README.md
+.env
+.git/
